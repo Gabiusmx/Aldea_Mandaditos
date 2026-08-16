@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALDEA Logistics | Logística Urbana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --naranja: #FF5722;
+            --naranja-oscuro: #E64A19;
+            --amarillo: #FFC107;
+            --negro: #111111;
+            --gris: #f5f5f5;
+            --blanco: #ffffff;
+            --texto: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--texto);
+            background: var(--blanco);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--blanco);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+            z-index: 1000;
+            padding: 12px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-nav img {
+            height: 48px;
+            width: auto;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--naranja);
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--negro);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--naranja);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--naranja);
+            color: var(--blanco);
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--naranja-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--naranja);
+            color: var(--naranja);
+        }
+
+        .btn-outline:hover {
+            background: var(--naranja);
+            color: var(--blanco);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(135deg, #fff8f5 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 350px;
+            height: 350px;
+            background: var(--amarillo);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1 1 450px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--negro);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 span {
+            color: var(--naranja);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 28px;
+            max-width: 480px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            flex: 1 1 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-visual img {
+            max-width: 320px;
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* Servicios */
+        .servicios {
+            padding: 80px 0;
+            background: var(--gris);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--negro);
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #666;
+            max-width: 560px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--naranja);
+            color: var(--blanco);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--negro);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Ventajas */
+        .ventajas {
+            padding: 80px 0;
+            background: var(--blanco);
+        }
+
+        .ventajas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .ventaja-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .ventaja-icon {
+            min-width: 48px;
+            height: 48px;
+            background: var(--amarillo);
+            color: var(--negro);
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .ventaja-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--negro);
+        }
+
+        .ventaja-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 0;
+            background: var(--negro);
+            color: var(--blanco);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: "";
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            background: var(--naranja);
+            opacity: 0.2;
+            border-radius: 50%;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 28px;
+            color: #ddd;
+        }
+
+        .cta .btn {
+            background: var(--naranja);
+            color: var(--blanco);
+            font-size: 1.1rem;
+            padding: 14px 32px;
+        }
+
+        .contacto-info {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contacto-info a {
+            color: var(--amarillo);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .contacto-info a:hover {
+            color: var(--blanco);
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #999;
+            padding: 32px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                right: 0;
+                background: var(--blanco);
+                flex-direction: column;
+                align-items: flex-end;
+                padding: 24px;
+                width: 220px;
+                box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+                transform: translateX(110%);
+                transition: transform 0.3s;
+            }
+
+            .nav-links.open {
+                transform: translateX(0);
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .cta h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Botón flotante teléfono */
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--naranja);
+            color: var(--blanco);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 14px rgba(255, 87, 34, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 87, 34, 0);
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="logo-nav" aria-label="Inicio">
+                <img src="/assets/images/logo mandaditos Aldea.png" alt="Logo ALDEA Logistics">
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"
+                aria-label="Abrir menú">☰</button>
+            <div class="nav-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#ventajas">Ventajas</a>
+                <a href="#contacto">Contacto</a>
+                <a href="https://www.facebook.com/aldealogistics" target="_blank" class="btn btn-outline">Facebook</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <h1>Tu logística urbana <span>sin complicaciones</span></h1>
+                <p>En ALDEA ayudamos a negocios, empresas y particulares a realizar sus entregas y recolecciones de
+                    manera práctica, segura y confiable. Facilitamos el traslado de artículos, documentos y alimentos.
+                </p>
+                <div class="hero-actions">
+                    <a href="https://wa.me/527472542065" target="_blank" rel="noopener noreferrer" class="btn">💬
+                        Escríbenos por WhatsApp</a>
+                    <a href="https://www.facebook.com/aldealogistics" target="_blank" class="btn btn-outline">Síguenos
+                        en Facebook</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <img src="/assets/images/logo mandaditos Aldea.png" alt="ALDEA Logistics Logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="servicios" id="servicios">
+        <div class="container">
+            <div class="section-header">
+                <h2>¿Qué trasladamos?</h2>
+                <p>Tenemos la solución ideal para cada tipo de envío dentro de la ciudad.</p>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">📦</div>
+                    <h3>Artículos</h3>
+                    <p>Desde paquetes pequeños hasta mercancía de tamaño mediano, cuidamos cada detalle de tu entrega.
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📄</div>
+                    <h3>Documentos</h3>
+                    <p>Entregas urgentes de papelería importante con puntualidad y confidencialidad garantizada.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🍔</div>
+                    <h3>Alimentos</h3>
+                    <p>Transporte cuidadoso de productos comestibles para que lleguen frescos y en perfectas
+                        condiciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ventajas" id="ventajas">
+        <div class="container">
+            <div class="section-header">
+                <h2>¿Por qué elegir ALDEA?</h2>
+                <p>Trabajamos con compromiso para brindarte la mejor experiencia de logística local.</p>
+            </div>
+            <div class="ventajas-grid">
+                <div class="ventaja-item">
+                    <div class="ventaja-icon">✅</div>
+                    <div>
+                        <h4>Práctico</h4>
+                        <p>Solicita tu servicio fácilmente y gestionamos todo el proceso por ti.</p>
+                    </div>
+                </div>
+                <div class="ventaja-item">
+                    <div class="ventaja-icon">🛡️</div>
+                    <div>
+                        <h4>Seguro</h4>
+                        <p>Tu mercancía viaja protegida y en buenas manos durante todo el trayecto.</p>
+                    </div>
+                </div>
+                <div class="ventaja-item">
+                    <div class="ventaja-icon">🤝</div>
+                    <div>
+                        <h4>Confiable</h4>
+                        <p>Cumplimos con los tiempos acordados y mantenemos comunicación constante.</p>
+                    </div>
+                </div>
+                <div class="ventaja-item">
+                    <div class="ventaja-icon">⚡</div>
+                    <div>
+                        <h4>Rápido</h4>
+                        <p>Optimizamos rutas para ofrecerte entregas ágiles dentro de la ciudad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contacto">
+        <div class="container">
+            <h2>¿Listo para hacer tu entrega?</h2>
+            <p>Contáctanos hoy mismo y descubre lo fácil que puede ser la logística urbana con ALDEA.</p>
+            <a href="https://wa.me/527472542065" target="_blank" rel="noopener noreferrer" class="btn">Escríbenos por
+                WhatsApp</a>
+            <div class="contacto-info">
+                <a href="https://wa.me/527472542065" target="_blank" rel="noopener noreferrer">💬 WhatsApp: 747 254
+                    2065</a>
+                <a href="https://www.facebook.com/aldealogistics" target="_blank">🌐 Facebook /aldealogistics</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p> ALDEA Logistics. Todos los derechos reservados.</p>
+            <p><a href="https://www.facebook.com/aldealogistics" target="_blank">Visítanos en Facebook</a></p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/527472542065" target="_blank" rel="noopener noreferrer" class="fab" aria-label="WhatsApp">
+        💬
+        <span class="sr-only">Abrir WhatsApp</span>
+    </a>
+
+</body>
+
+</html>
